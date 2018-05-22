@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetAdd", "BudgetAdd\BudgetAdd.csproj", "{FB958F95-333C-4E9B-996B-0093BDC7601E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetAddTests", "BudgetAddTests\BudgetAddTests.csproj", "{BCED2005-B1A4-49AC-B6CE-24EF82BC28E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB958F95-333C-4E9B-996B-0093BDC7601E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB958F95-333C-4E9B-996B-0093BDC7601E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB958F95-333C-4E9B-996B-0093BDC7601E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB958F95-333C-4E9B-996B-0093BDC7601E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCED2005-B1A4-49AC-B6CE-24EF82BC28E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCED2005-B1A4-49AC-B6CE-24EF82BC28E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCED2005-B1A4-49AC-B6CE-24EF82BC28E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCED2005-B1A4-49AC-B6CE-24EF82BC28E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5438566B-F430-4C38-8418-4C909AE6DF30}
+	EndGlobalSection
+EndGlobal
