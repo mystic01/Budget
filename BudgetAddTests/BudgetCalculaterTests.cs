@@ -1,121 +1,134 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BudgetAdd;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BudgetAdd.Tests
 {
     [TestClass()]
     public class BudgetCalculaterTests
     {
-        [TestMethod()]
-        public void GetBudgetTest_20180415_20180515_620()
-        {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2018,04,15), new DateTime(2018,05,15));
-            var actual = target.GetBudget();
-            Assert.AreEqual(620, actual);
-        }
+        private IRepo _repoStub;
 
         [TestMethod()]
-        public void GetBudgetTest_20180415_20180630_940()
+        public void GetBudgetTest_20160115_20160213_251()
         {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2018,04,15), new DateTime(2018,06,30));
-            var actual = target.GetBudget();
-            Assert.AreEqual(940, actual);
-        }
-
-
-        [TestMethod()]
-        public void GetBudgetTest_20180520_20180716_560()
-        {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2018,05,20), new DateTime(2018,07,16));
-            var actual = target.GetBudget();
-            Assert.AreEqual(560, actual);
-        }
-
-
-        [TestMethod()]
-        public void GetBudgetTest_20160215_20160213_251()
-        {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2016,01,15), new DateTime(2016,02,13));
-            var actual = target.GetBudget();
-            Assert.AreEqual(251, actual);
-        }
-
-        [TestMethod()]
-        public void GetBudgetTest_20160215_20160213_0()
-        {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2016,02,15), new DateTime(2016,02,13));
-            var actual = target.GetBudget();
-            Assert.AreEqual(0, actual);
-        }
-
-        [TestMethod()]
-        public void GetBudgetTest_20160215_20160216_38()
-        {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2016,02,15), new DateTime(2016,02,16));
-            var actual = target.GetBudget();
-            Assert.AreEqual(38, actual);
-        }
-        
-
-        [TestMethod()]
-        public void GetBudgetTest_20180401_20180401_20()
-        {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2018,04,01), new DateTime(2018,04,01));
-            var actual = target.GetBudget();
-            Assert.AreEqual(20, actual);
+            CreateRepoStub("2016-02 560");
+            Assert.AreEqual(251, GetBudget("2016-01-15", "2016-02-13"));
         }
 
         [TestMethod()]
         public void GetBudgetTest_20160201_20180430_1160()
         {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2016, 02, 01), new DateTime(2018, 04, 30));
-            var actual = target.GetBudget();
-            Assert.AreEqual(1160, actual);
+            CreateRepoStub("2016-02 560", "2016-02 560", "2018-04 600",
+                "2018-05 620", "2018-07 620", "2019-02 990");
+            Assert.AreEqual(1160, GetBudget("2016-02-01", "2018-04-30"));
         }
 
         [TestMethod()]
-        public void GetBudgetTest_20190201_20190630_4940()
+        public void GetBudgetTest_20160215_20160213_0()
         {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2019, 02, 01), new DateTime(2019, 06, 30));
-            var actual = target.GetBudget();
-            Assert.AreEqual(4950, actual);
+            CreateRepoStub("2016-02 560");
+            Assert.AreEqual(0, GetBudget("2016-02-15", "2016-02-13"));
+        }
+
+        [TestMethod()]
+        public void GetBudgetTest_20160215_20160216_38()
+        {
+            CreateRepoStub("2016-02 560");
+            Assert.AreEqual(38, GetBudget("2016-02-15", "2016-02-16"));
+        }
+
+        [TestMethod()]
+        public void GetBudgetTest_20180101_20180130_0()
+        {
+            CreateRepoStub("2016-02 560");
+            Assert.AreEqual(0, GetBudget("2018-01-01", "2018-01-30"));
         }
 
         [TestMethod()]
         public void GetBudgetTest_20180201_20190201_1875()
         {
-            var target = new BudgetCalculater(new RepoStub(), new DateTime(2018, 02, 01), new DateTime(2019, 02, 01));
-            var actual = target.GetBudget();
-            Assert.AreEqual(1875, actual);
+            CreateRepoStub("2018-04 600", "2018-05 620", "2018-07 620",
+                "2019-02 990", "2019-03 990");
+            Assert.AreEqual(1875, GetBudget("2018-02-01", "2019-02-01"));
+        }
+
+        [TestMethod()]
+        public void GetBudgetTest_20180401_20180401_20()
+        {
+            CreateRepoStub("2018-04 600");
+            Assert.AreEqual(20, GetBudget("2018-04-01", "2018-04-01"));
+        }
+
+        [TestMethod()]
+        public void GetBudgetTest_20180415_20180515_620()
+        {
+            CreateRepoStub("2018-04 600", "2018-05 620");
+            Assert.AreEqual(620, GetBudget("2018-04-15", "2018-05-15"));
+        }
+
+        [TestMethod()]
+        public void GetBudgetTest_20180415_20180630_940()
+        {
+            CreateRepoStub("2018-04 600", "2018-05 620");
+            Assert.AreEqual(940, GetBudget("2018-04-15", "2018-06-30"));
+        }
+
+        [TestMethod()]
+        public void GetBudgetTest_20180520_20180716_560()
+        {
+            CreateRepoStub("2018-05 620", "2018-07 620");
+            Assert.AreEqual(560, GetBudget("2018-05-20", "2018-07-16"));
+        }
+
+        [TestMethod()]
+        public void GetBudgetTest_20190201_20190630_4950()
+        {
+            CreateRepoStub("2019-02 990", "2019-03 990", "2019-04 990",
+                "2019-05 990", "2019-06 990");
+            Assert.AreEqual(4950, GetBudget("2019-02-01", "2019-06-30"));
+        }
+
+        private void CreateRepoStub(params string[] budgets)
+        {
+            var budgetList = new List<Budget>();
+            foreach (var budget in budgets)
+            {
+                budgetList.Add(new Budget(budget.Split(' ')[0], budget.Split(' ')[1]));
+            }
+            _repoStub = new RepoStub(budgetList);
+        }
+
+        private int GetBudget(string start, string end)
+        {
+            return GenerateBudgetCalculater(start, end).GetBudget();
+        }
+
+        private BudgetCalculater GenerateBudgetCalculater(string start, string end)
+        {
+            return new BudgetCalculater(_repoStub,
+                DateTime.ParseExact(start, "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                DateTime.ParseExact(end, "yyyy-MM-dd", CultureInfo.InvariantCulture));
         }
     }
 
     internal class RepoStub : IRepo
     {
+        private List<Budget> _budgets;
+
+        public RepoStub(List<Budget> budgets)
+        {
+            _budgets = budgets;
+        }
+
         public void Add(Budget budget)
         {
         }
 
         public ICollection<Budget> GetAllBudgets()
         {
-            var result = new List<Budget>()
-            {
-                new Budget("2016-02", "560" ),
-                new Budget("2018-04", "600" ),
-                new Budget("2018-05", "620" ),
-                new Budget("2018-07", "620" ),
-                new Budget("2019-02", "990" ),
-                new Budget("2019-03", "990" ),
-                new Budget("2019-04", "990" ),
-                new Budget("2019-05", "990" ),
-                new Budget("2019-06", "990" ),
-            };
-            return result;
+            return _budgets;
         }
     }
 }

@@ -9,10 +9,9 @@ namespace BudgetAdd
 {
     internal class BudgetCalculater
     {
+        private readonly DateTime _endDate;
         private readonly IRepo _repo;
         private readonly DateTime _startDate;
-        private readonly DateTime _endDate;
-
         public BudgetCalculater(IRepo repo, DateTime startDate, DateTime endDate)
         {
             _repo = repo;
@@ -34,6 +33,41 @@ namespace BudgetAdd
                 summary += CalculateLastMonthBudget(budgets);
 
             return (int) summary;
+        }
+
+        private float CalculateFirstMonthBudget(ICollection<Budget> budgets)
+        {
+            float summary = 0;
+            var firstMonthText = _startDate.Year + "-" + _startDate.Month.ToString("d2");
+            var firstBudget = budgets.FirstOrDefault(x => x.Month == firstMonthText);
+            if (firstBudget != null)
+            {
+                var daysInMonth = DateTime.DaysInMonth(_startDate.Year, _startDate.Month);
+                var oneDayBudget = float.Parse(firstBudget.Amount) / daysInMonth;
+                if (_startDate.Year == _endDate.Year && _startDate.Month == _endDate.Month)
+                    daysInMonth = _endDate.Day;
+
+                var days = daysInMonth - _startDate.Day + 1;
+                summary = oneDayBudget * days;
+            }
+
+            return summary;
+        }
+
+        private float CalculateLastMonthBudget(ICollection<Budget> budgets)
+        {
+            float summary = 0;
+            var endMonthText = _endDate.Year + "-" + _endDate.Month.ToString("d2");
+            var endBudget = budgets.FirstOrDefault(x => x.Month == endMonthText);
+            if (endBudget != null)
+            {
+                var daysInMonth = DateTime.DaysInMonth(_endDate.Year, _endDate.Month);
+                var oneDayBudget = float.Parse(endBudget.Amount) / daysInMonth;
+                var days = _endDate.Day;
+                summary = oneDayBudget * days;
+            }
+
+            return summary;
         }
 
         private float CalculateMiddleMonthBudget(ICollection<Budget> budgets)
@@ -59,41 +93,6 @@ namespace BudgetAdd
         private bool IsTheSameMonth()
         {
             return _startDate.Year == _endDate.Year && _startDate.Month == _endDate.Month;
-        }
-
-        private float CalculateLastMonthBudget(ICollection<Budget> budgets)
-        {
-            float summary = 0;
-            var endMonthText = _endDate.Year + "-" + _endDate.Month.ToString("d2");
-            var endBudget = budgets.FirstOrDefault(x => x.Month == endMonthText);
-            if (endBudget != null)
-            {
-                var daysInMonth = DateTime.DaysInMonth(_endDate.Year, _endDate.Month);
-                var oneDayBudget = float.Parse(endBudget.Amount) / daysInMonth;
-                var days = _endDate.Day;
-                summary = oneDayBudget * days;
-            }
-
-            return summary;
-        }
-
-        private float CalculateFirstMonthBudget(ICollection<Budget> budgets)
-        {
-            float summary = 0;
-            var firstMonthText = _startDate.Year + "-" + _startDate.Month.ToString("d2");
-            var firstBudget = budgets.FirstOrDefault(x => x.Month == firstMonthText);
-            if (firstBudget != null)
-            {
-                var daysInMonth = DateTime.DaysInMonth(_startDate.Year, _startDate.Month);
-                var oneDayBudget = float.Parse(firstBudget.Amount) / daysInMonth;
-                if (_startDate.Year == _endDate.Year && _startDate.Month == _endDate.Month)
-                    daysInMonth = _endDate.Day;
-
-                var days = daysInMonth - _startDate.Day + 1;
-                summary = oneDayBudget * days;
-            }
-
-            return summary;
         }
     }
 }
