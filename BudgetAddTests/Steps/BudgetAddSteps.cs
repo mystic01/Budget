@@ -41,10 +41,9 @@ namespace BudgetAddTests.Steps
         [Then(@"the result should be ""(.*)"" and ""(.*)"" on the screen")]
         public void ThenTheResultShouldBeAndOnTheScreen(string monthText, string amountText)
         {
-            var resultMonth = _window.Get<TestStack.White.UIItems.Label>("resultMonth");
-            var resultAmount = _window.Get<TestStack.White.UIItems.Label>("resultAmount");
-            Assert.AreEqual(monthText, resultMonth.Text);
-            Assert.AreEqual(amountText, resultAmount.Text);
+            var resultListBox = _window.Get<TestStack.White.UIItems.ListBoxItems.ListBox>("resultListBox");
+            //CollectionAssert.Contains(resultListBox.Items);.That( resultListBox.Items)
+            Assert.AreEqual(monthText + " " + amountText, resultListBox.Items[0].Text);
         }
     }
 }

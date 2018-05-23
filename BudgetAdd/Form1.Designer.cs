@@ -33,6 +33,7 @@
             this.month = new System.Windows.Forms.TextBox();
             this.resultMonth = new System.Windows.Forms.Label();
             this.resultAmount = new System.Windows.Forms.Label();
+            this.resultListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // amount
@@ -80,11 +81,23 @@
             this.resultAmount.TabIndex = 5;
             this.resultAmount.Text = "500";
             // 
+            // resultListBox
+            // 
+            this.resultListBox.FormattingEnabled = true;
+            this.resultListBox.ItemHeight = 15;
+            this.resultListBox.Items.AddRange(new object[] {
+            "2018-02 500"});
+            this.resultListBox.Location = new System.Drawing.Point(407, 95);
+            this.resultListBox.Name = "resultListBox";
+            this.resultListBox.Size = new System.Drawing.Size(120, 94);
+            this.resultListBox.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(577, 341);
+            this.Controls.Add(this.resultListBox);
             this.Controls.Add(this.resultAmount);
             this.Controls.Add(this.resultMonth);
             this.Controls.Add(this.month);
@@ -104,6 +117,7 @@
         private System.Windows.Forms.TextBox month;
         private System.Windows.Forms.Label resultMonth;
         private System.Windows.Forms.Label resultAmount;
+        private System.Windows.Forms.ListBox resultListBox;
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Configuration;
 using System.Windows.Forms;
 
 namespace BudgetAdd
@@ -12,6 +13,10 @@ namespace BudgetAdd
 
         private void save_Click(object sender, EventArgs e)
         {
+            var inputMonth = month.Text;
+            var inputAmount = amount.Text;
+
+            
         }
     }
 }
