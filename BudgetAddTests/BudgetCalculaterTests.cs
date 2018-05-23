@@ -38,11 +38,11 @@ namespace BudgetAdd.Tests
 
 
         [TestMethod()]
-        public void GetBudgetTest_20160215_20160213_247()
+        public void GetBudgetTest_20160215_20160213_251()
         {
             var target = new BudgetCalculater(new RepoStub(), new DateTime(2016,01,15), new DateTime(2016,02,13));
             var actual = target.GetBudget();
-            Assert.AreEqual(247, actual);
+            Assert.AreEqual(251, actual);
         }
 
         [TestMethod()]
@@ -70,23 +70,21 @@ namespace BudgetAdd.Tests
             Assert.AreEqual(20, actual);
         }
 
-        //[TestMethod()]
-        //public void GetBudgetTest_20160201_20180430_1160()
-        //{
-        //    var target = new BudgetCalculater(new RepoStub(), new DateTime(2016,02,01), new DateTime(2018,04,30));
-        //    var actual = target.GetBudget();
-        //    Assert.AreEqual(1160, actual);
-        //}
-        
+        [TestMethod()]
+        public void GetBudgetTest_20160201_20180430_1160()
+        {
+            var target = new BudgetCalculater(new RepoStub(), new DateTime(2016, 02, 01), new DateTime(2018, 04, 30));
+            var actual = target.GetBudget();
+            Assert.AreEqual(1160, actual);
+        }
 
-        //[TestMethod()]
-        //public void GetBudgetTest_20160201_20160630_()
-        //{
-        //    var target = new BudgetCalculater(new RepoStub(), new DateTime(2018,02,01), new DateTime(2018,06,30));
-        //    var actual = target.GetBudget();
-        //    Assert.AreEqual(38, actual);
-        //}
-        
+        [TestMethod()]
+        public void GetBudgetTest_20190201_20190630_4940()
+        {
+            var target = new BudgetCalculater(new RepoStub(), new DateTime(2019, 02, 01), new DateTime(2019, 06, 30));
+            var actual = target.GetBudget();
+            Assert.AreEqual(4950, actual);
+        }
     }
 
     internal class RepoStub : IRepo
@@ -103,11 +101,11 @@ namespace BudgetAdd.Tests
                 new Budget("2018-04", "600" ),
                 new Budget("2018-05", "620" ),
                 new Budget("2018-07", "620" ),
-                //new Budget("2018-02", "990" ),
-                //new Budget("2018-03", "990" ),
-                //new Budget("2018-04", "990" ),
-                //new Budget("2018-05", "990" ),
-                //new Budget("2018-06", "990" ),
+                new Budget("2019-02", "990" ),
+                new Budget("2019-03", "990" ),
+                new Budget("2019-04", "990" ),
+                new Budget("2019-05", "990" ),
+                new Budget("2019-06", "990" ),
             };
             return result;
         }
