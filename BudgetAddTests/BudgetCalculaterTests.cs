@@ -85,6 +85,14 @@ namespace BudgetAdd.Tests
             var actual = target.GetBudget();
             Assert.AreEqual(4950, actual);
         }
+
+        [TestMethod()]
+        public void GetBudgetTest_20180201_20190201_1875()
+        {
+            var target = new BudgetCalculater(new RepoStub(), new DateTime(2018, 02, 01), new DateTime(2019, 02, 01));
+            var actual = target.GetBudget();
+            Assert.AreEqual(1875, actual);
+        }
     }
 
     internal class RepoStub : IRepo

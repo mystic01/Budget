@@ -40,7 +40,8 @@ namespace BudgetAdd
         {
             float summary = 0;
             DateTime target = _startDate.AddMonths(1);
-            while (target.Year <= _endDate.Year && target.Month < _endDate.Month)
+            while (target.Year < _endDate.Year 
+                   || (target.Year == _endDate.Year && target.Month < _endDate.Month))
             {
                 var targetMonthText = target.Year + "-" + target.Month.ToString("d2");
                 var targetBudget = budgets.FirstOrDefault(x => x.Month == targetMonthText);
