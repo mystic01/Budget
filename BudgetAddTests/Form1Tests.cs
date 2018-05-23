@@ -12,14 +12,14 @@ namespace BudgetAdd.Tests
     [TestClass()]
     public class Form1Tests
     {
-        [TestMethod()]
-        public void save_ClickTest_RepoSaveWillBeCalled()
-        {
-            //var repoStub = Substitute.For<IRepo>();
-            //var target = new Form1(repoStub);
+        //[TestMethod()]
+        //public void save_ClickTest_RepoSaveWillBeCalled()
+        //{
+        //    var repoStub = Substitute.For<IRepo>();
+        //    var target = new Form1(repoStub);
 
-            //target.save_Click();
-            //Assert.Fail();
-        }
+        //    target.save_Click();
+        //    Assert.Fail();
+        //}
     }
 }
