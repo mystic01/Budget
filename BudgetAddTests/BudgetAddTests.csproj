@@ -74,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BudgetAdd.feature</DependentUpon>
     </Compile>
+    <Compile Include="Form1Tests.cs" />
     <Compile Include="Steps\BudgetAddSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,6 +85,12 @@
       <LastGenOutput>BudgetAdd.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetAdd\BudgetAdd.csproj">
+      <Project>{FB958F95-333C-4E9B-996B-0093BDC7601E}</Project>
+      <Name>BudgetAdd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

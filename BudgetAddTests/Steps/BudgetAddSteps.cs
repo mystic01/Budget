@@ -34,16 +34,19 @@ namespace BudgetAddTests.Steps
             month.Text = monthText;
             var amount = _window.Get<TextBox>("amount");
             amount.Text = amountText;
-            var button = _window.Get<Button>("save");
-            button.Click();
+            var saveButton = _window.Get<Button>("save");
+            saveButton.Click();
         }
 
         [Then(@"the result should be ""(.*)"" and ""(.*)"" on the screen")]
         public void ThenTheResultShouldBeAndOnTheScreen(string monthText, string amountText)
         {
+            var UopdateButton = _window.Get<Button>("update");
+            UopdateButton.Click();
+
             var resultListBox = _window.Get<TestStack.White.UIItems.ListBoxItems.ListBox>("resultListBox");
-            //CollectionAssert.Contains(resultListBox.Items);.That( resultListBox.Items)
-            Assert.AreEqual(monthText + " " + amountText, resultListBox.Items[0].Text);
+            var existExceptedItem = resultListBox.Items.Exists(x => x.Text == (monthText + " " + amountText));
+            Assert.IsTrue(existExceptedItem);
         }
     }
 }
