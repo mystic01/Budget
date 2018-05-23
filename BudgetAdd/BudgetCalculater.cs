@@ -78,7 +78,7 @@ namespace BudgetAdd
 
         private int CalculateFirstMonthBudget(ICollection<Budget> budgets)
         {
-            var summary = 0;
+            int summary = 0;
             var firstMonthText = _startDate.Year + "-" + _startDate.Month.ToString("d2");
             var firstBudget = budgets.FirstOrDefault(x => x.Month == firstMonthText);
             if (firstBudget != null)

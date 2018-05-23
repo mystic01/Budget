@@ -60,6 +60,33 @@ namespace BudgetAdd.Tests
             var actual = target.GetBudget();
             Assert.AreEqual(38, actual);
         }
+        
+
+        [TestMethod()]
+        public void GetBudgetTest_20180401_20180401_20()
+        {
+            var target = new BudgetCalculater(new RepoStub(), new DateTime(2018,04,01), new DateTime(2018,04,01));
+            var actual = target.GetBudget();
+            Assert.AreEqual(20, actual);
+        }
+
+        //[TestMethod()]
+        //public void GetBudgetTest_20160201_20180430_1160()
+        //{
+        //    var target = new BudgetCalculater(new RepoStub(), new DateTime(2016,02,01), new DateTime(2018,04,30));
+        //    var actual = target.GetBudget();
+        //    Assert.AreEqual(1160, actual);
+        //}
+        
+
+        //[TestMethod()]
+        //public void GetBudgetTest_20160201_20160630_()
+        //{
+        //    var target = new BudgetCalculater(new RepoStub(), new DateTime(2018,02,01), new DateTime(2018,06,30));
+        //    var actual = target.GetBudget();
+        //    Assert.AreEqual(38, actual);
+        //}
+        
     }
 
     internal class RepoStub : IRepo
@@ -76,6 +103,11 @@ namespace BudgetAdd.Tests
                 new Budget("2018-04", "600" ),
                 new Budget("2018-05", "620" ),
                 new Budget("2018-07", "620" ),
+                //new Budget("2018-02", "990" ),
+                //new Budget("2018-03", "990" ),
+                //new Budget("2018-04", "990" ),
+                //new Budget("2018-05", "990" ),
+                //new Budget("2018-06", "990" ),
             };
             return result;
         }
