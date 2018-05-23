@@ -1,8 +1,11 @@
-﻿using TechTalk.SpecFlow;
-using TestStack.White;
+﻿using System.Windows.Forms;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TechTalk.SpecFlow;
 using TestStack.White.Factory;
-using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowItems;
+using Application = TestStack.White.Application;
+using Button = TestStack.White.UIItems.Button;
+using TextBox = TestStack.White.UIItems.TextBox;
 
 namespace BudgetAddTests.Steps
 {
@@ -36,9 +39,12 @@ namespace BudgetAddTests.Steps
         }
 
         [Then(@"the result should be ""(.*)"" and ""(.*)"" on the screen")]
-        public void ThenTheResultShouldBeAndOnTheScreen(string p0, int p1)
+        public void ThenTheResultShouldBeAndOnTheScreen(string monthText, string amountText)
         {
-            //ScenarioContext.Current.Pending();
+            var resultMonth = _window.Get<TestStack.White.UIItems.Label>("resultMonth");
+            var resultAmount = _window.Get<TestStack.White.UIItems.Label>("resultAmount");
+            Assert.AreEqual(monthText, resultMonth.Text);
+            Assert.AreEqual(amountText, resultAmount.Text);
         }
     }
 }
