@@ -71,7 +71,7 @@ namespace BudgetAdd
                 var daysInMonth = DateTime.DaysInMonth(_endDate.Year, _endDate.Month);
                 var oneDayBudget = float.Parse(endBudget.Amount) / daysInMonth;
                 var days = _endDate.Day;
-                summary += oneDayBudget * days;
+                summary = oneDayBudget * days;
             }
 
             return summary;
@@ -90,7 +90,7 @@ namespace BudgetAdd
                     daysInMonth = _endDate.Day;
 
                 var days = daysInMonth - _startDate.Day + 1;
-                summary += oneDayBudget * days;
+                summary = oneDayBudget * days;
             }
 
             return summary;
