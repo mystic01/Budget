@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NSubstitute;
 
 namespace BudgetAdd.Tests
 {
@@ -12,9 +13,12 @@ namespace BudgetAdd.Tests
     public class Form1Tests
     {
         [TestMethod()]
-        public void save_ClickTest_SaveWillBeCalled()
+        public void save_ClickTest_RepoSaveWillBeCalled()
         {
+            //var repoStub = Substitute.For<IRepo>();
+            //var target = new Form1(repoStub);
 
+            //target.save_Click();
             //Assert.Fail();
         }
     }

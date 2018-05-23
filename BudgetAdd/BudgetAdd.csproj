@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Budget.cs" />
+    <Compile Include="BudgetCalculater.cs" />
     <Compile Include="BudgetModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
