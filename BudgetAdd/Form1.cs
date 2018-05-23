@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Configuration;
 using System.Windows.Forms;
 
 namespace BudgetAdd
@@ -16,7 +15,28 @@ namespace BudgetAdd
             var inputMonth = month.Text;
             var inputAmount = amount.Text;
 
-            
+            var budget = new Budget(inputMonth, inputAmount);
+            var repo = new Repo();
+            repo.Add(budget);
+        }
+    }
+
+    internal class Repo
+    {
+        public void Add(Budget budget)
+        {
+        }
+    }
+
+    internal class Budget
+    {
+        private readonly string _inputMonth;
+        private readonly string _inputAmount;
+
+        public Budget(string inputMonth, string inputAmount)
+        {
+            _inputMonth = inputMonth;
+            _inputAmount = inputAmount;
         }
     }
 }
