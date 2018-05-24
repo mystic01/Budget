@@ -7,13 +7,13 @@ using DateTime = System.DateTime;
 
 namespace BudgetAdd
 {
-    internal class BudgetCalculater
+    internal class BudgetCalculator
     {
         private readonly ICollection<Budget> _budgetsLookup;
         private readonly DateTime _endDate;
         private readonly DateTime _startDate;
 
-        public BudgetCalculater(IRepo repo, DateTime startDate, DateTime endDate)
+        public BudgetCalculator(IRepo repo, DateTime startDate, DateTime endDate)
         {
             _budgetsLookup = repo.GetAllBudgets();
             _startDate = startDate;

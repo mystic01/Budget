@@ -105,9 +105,9 @@ namespace BudgetAdd.Tests
             return GenerateBudgetCalculater(start, end).GetBudget();
         }
 
-        private BudgetCalculater GenerateBudgetCalculater(string start, string end)
+        private BudgetCalculator GenerateBudgetCalculater(string start, string end)
         {
-            return new BudgetCalculater(_repoStub,
+            return new BudgetCalculator(_repoStub,
                 DateTime.ParseExact(start, "yyyy-MM-dd", CultureInfo.InvariantCulture),
                 DateTime.ParseExact(end, "yyyy-MM-dd", CultureInfo.InvariantCulture));
         }
