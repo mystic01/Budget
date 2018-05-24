@@ -22,7 +22,7 @@ namespace BudgetAdd
 
         public int GetBudget()
         {
-            if (IsErrorDate())
+            if (IsDateError())
                 return 0;
 
             var toalBudget = CalculateFirstMonthBudget();
@@ -37,9 +37,21 @@ namespace BudgetAdd
         private float CalculateFirstMonthBudget()
         {
             var daysInMonth = DateTime.DaysInMonth(_startDate.Year, _startDate.Month);
-            var days = GetFirstMonthDays(daysInMonth);
+            var firstMonthDays = GetDaysInFirstMonth(daysInMonth);
             var oneDayBudget = GetMonthBudgetInRepo(_startDate) / daysInMonth;
-            return oneDayBudget * days;
+            return oneDayBudget * firstMonthDays;
+        }
+
+        private float CalculateMiddleMonthBudget()
+        {
+            float sum = 0;
+            var iMonth = _startDate.AddMonths(1);
+            while (IsMonthOfDate1BeforeMonthOfDate2(iMonth, _endDate))
+            {
+                sum += GetMonthBudgetInRepo(iMonth);
+                iMonth = iMonth.AddMonths(1);
+            }
+            return sum;
         }
 
         private float CalculateLastMonthBudget()
@@ -50,19 +62,7 @@ namespace BudgetAdd
             return oneDayBudget * days;
         }
 
-        private float CalculateMiddleMonthBudget()
-        {
-            float summary = 0;
-            var iMonth = _startDate.AddMonths(1);
-            while (IsDateMonth1BeforeDateMonth2(iMonth, _endDate))
-            {
-                summary += GetMonthBudgetInRepo(iMonth);
-                iMonth = iMonth.AddMonths(1);
-            }
-            return summary;
-        }
-
-        private int GetFirstMonthDays(int daysInMonth)
+        private int GetDaysInFirstMonth(int daysInMonth)
         {
             var days = daysInMonth - _startDate.Day + 1;
             if (IsTheSameMonth(_startDate, _endDate))
@@ -76,16 +76,16 @@ namespace BudgetAdd
             var budget = _budgetsLookup.FirstOrDefault(x => x.Month == monthText);
             if (budget == null)
                 return 0;
-            return Int32.Parse(budget.Amount);
+            return int.Parse(budget.Amount);
         }
 
-        private bool IsDateMonth1BeforeDateMonth2(DateTime month1, DateTime month2)
+        private bool IsMonthOfDate1BeforeMonthOfDate2(DateTime month1, DateTime month2)
         {
             return month1.Year < month2.Year
                    || (month1.Year == month2.Year && month1.Month < month2.Month);
         }
 
-        private bool IsErrorDate()
+        private bool IsDateError()
         {
             return _startDate > _endDate;
         }
